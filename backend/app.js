@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
+const helmet = require("helmet");
 
 // importation des routes que l'on met dans un index.js
 const router = require("./routes/index");
@@ -30,6 +31,8 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use(helmet());
 
 //méthode .json qui va transformer notre requête en objet JSON lisible
 app.use(bodyParser.json());

@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
 
-const userRoutes = require("./routes/user");
-const sauceRoutes = require("./routes/sauce");
+// importation des routes que l'on met dans un index.js
+const router = require("./routes/index");
 
 // connecting to the data base
 mongoose
@@ -31,11 +31,13 @@ app.use((req, res, next) => {
   next();
 });
 
+//méthode .json qui va transformer notre requête en objet JSON lisible
 app.use(bodyParser.json());
 
+// Serve static files
 app.use("/images", express.static(path.join(__dirname, "images")));
 
-app.use("/api/sauces", sauceRoutes);
-app.use("/api/auth", userRoutes);
+// on recupere nos routes
+app.use("/api", router);
 
 module.exports = app;

@@ -1,11 +1,9 @@
 const passwordValidator = require("password-validator");
 
 // creation du shéma
-
 const passwordSchema = new passwordValidator();
 
 // schema du mot de passe qui doit etre respecter
-
 passwordSchema
   .is()
   .min(8) // Minimum length 8
@@ -34,7 +32,10 @@ module.exports = (req, res, next) => {
     next();
   } else {
     return res.status(400).json({
-      error: `le mot de passe n'est pas assez fort passwordSchema.validate('req.body.password', { list: true })`,
+      error: `le mot de passe n'es pas assez fort ${passwordSchema.validate(
+        "req.body.password",
+        { list: true }
+      )}`,
     });
   }
 };

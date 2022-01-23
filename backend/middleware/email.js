@@ -5,7 +5,7 @@ module.exports = (req, res, next) => {
     next();
   } else {
     return res.status(400).json({
-      error: `le mot de passe n'es pas assez fort ${validator.validate(
+      error: `L'adress mail n'es pas valide ${validator.validate(
         "req.body.email",
         { list: true }
       )}`,

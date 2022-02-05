@@ -22,11 +22,6 @@ passwordSchema
   .not()
   .oneOf(["Passw0rd", "Password123"]); // Blacklist these values
 
-// console.log("---> CONTENUE passwordSchema");
-// console.log(passwordSchema);
-
-// verification de la qualiter du mot de passe
-
 module.exports = (req, res, next) => {
   if (passwordSchema.validate(req.body.password)) {
     next();

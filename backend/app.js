@@ -2,8 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
-const helmet = require("helmet");
-const rateLimit = require("express-rate-limit");
 
 // importation des routes que l'on met dans un index.js
 const router = require("./routes/index");
@@ -32,19 +30,6 @@ app.use((req, res, next) => {
   );
   next();
 });
-
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
-
-// Apply the rate limiting middleware to all requests
-app.use(limiter);
-
-// utilisation de helmet
-app.use(helmet());
 
 //méthode .json qui va transformer notre requête en objet JSON lisible
 app.use(bodyParser.json());
